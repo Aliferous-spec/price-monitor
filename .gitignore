@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project data
+price_history.csv
+*.png
+*.jpg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config with secrets
+# config.py  # 如果不想把邮箱密码提交上去，取消此行注释
