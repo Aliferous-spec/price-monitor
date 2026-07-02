@@ -154,5 +154,9 @@ price_history.csv
 *.db
 *.sqlite3
 
-# Config with secrets (uncomment if needed)
-# config.py
+# Config with secrets
+config.py
+
+# Price history data
+price_history.jsonl
+demo_history.jsonl
