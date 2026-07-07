@@ -188,9 +188,32 @@ def main() -> None:
         ", ".join(NOTIFIERS.keys()) or "(none)",
     )
 
+    consecutive_errors = 0
+    MAX_CONSECUTIVE_ERRORS = 5
+
     try:
         while True:
-            check_once(config)
+            try:
+                check_once(config)
+                consecutive_errors = 0  # 成功后重置
+            except Exception as exc:
+                # ---- 全局兜底：即使 check_once 内部崩溃也不退出 ----
+                logging.error(
+                    "未预期的异常 (%s): %s — 跳过本次检查，继续运行",
+                    type(exc).__name__, exc,
+                )
+                logging.debug("详细堆栈:", exc_info=True)
+                consecutive_errors += 1
+                if consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+                    logging.critical(
+                        "连续异常 %d 次，自动退出。请检查:\n"
+                        "  1) 网络是否正常\n"
+                        "  2) 目标页面 URL 是否仍然有效\n"
+                        "  3) CSS_SELECTOR 是否需要更新",
+                        MAX_CONSECUTIVE_ERRORS,
+                    )
+                    break
+
             logging.info("Next check in %ds ...", interval)
             time.sleep(interval)
     except KeyboardInterrupt:
