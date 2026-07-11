@@ -10,6 +10,7 @@ price-monitor/
 ├── scraper.py          # 网页抓取 & 价格解析
 ├── storage.py          # 数据持久化 & 历史查询
 ├── notifier.py         # 通知渠道（邮件 / Telegram）
+├── visualization.py    # 价格走势可视化（matplotlib）
 ├── demo.py             # 一键验证三个模块是否正常
 ├── config.example.py   # 配置文件模板
 └── requirements.txt    # 依赖
@@ -22,6 +23,7 @@ price-monitor/
 | `scraper.py` | HTTP 请求（含重试）、CSS 选择器解析、多地区价格格式归一化 |
 | `storage.py` | JSON-lines 持久化、历史最低价查询、降价检测 |
 | `notifier.py` | 可插拔的通知渠道（已内置 Email + Telegram），注册即用 |
+| `visualization.py` | matplotlib 价格走势图，支持 demo 模式和历史数据绘图 |
 
 ## 运行效果
 
@@ -59,6 +61,22 @@ $ python demo.py
   ✅ 三大模块就绪: scraper · storage · notifier
 ============================================================
 ```
+
+## 价格走势可视化
+
+`visualization.py` 用 matplotlib 将价格历史渲染为折线图，无需真实爬虫数据即可预览效果：
+
+```bash
+# 生成演示图表（30 天模拟数据）
+python visualization.py --demo
+
+# 从真实历史数据生成
+python visualization.py --file price_history.jsonl
+```
+
+![价格走势图](price_chart.png)
+
+图表包含：日价格折线、7 日均价参考线、最低/当前价格标注、显著降价百分比标记。
 
 ## 快速开始
 

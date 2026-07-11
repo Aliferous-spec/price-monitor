@@ -150,6 +150,7 @@ Thumbs.db
 data/
 price_history.csv
 *.png
+!price_chart.png
 *.jpg
 *.db
 *.sqlite3
