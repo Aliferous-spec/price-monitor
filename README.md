@@ -2,6 +2,14 @@
 
 一个轻量级 Python 价格监控工具 — 自动抓取商品页面、记录价格历史、在降价时发送通知。
 
+## 📸 Demo 演示
+
+**一键验证三大核心模块，无需配置即可预览完整工作流：**
+
+![Feature Demo](demo.gif)
+
+> `python demo.py` → 测试 scraper / storage / notifier  →  `python visualization.py --demo` → 生成价格走势图
+
 ## 架构
 
 ```
